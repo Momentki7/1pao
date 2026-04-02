@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-misty-pink: rgba(255, 240, 248, 0.75);
+  --color-misty-pink-dark: #f8bbd0;
+  --color-milk-yellow: #fffff2;
+  --color-milk-yellow-dark: #fff59d;
+  --color-soft-white: #fafafa;
+  --color-ios-gray: #8e8e93;
+}
+
+@layer base {
+  body {
+    @apply bg-soft-white text-slate-800 antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+}
+
+.ios-blur {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ========================================= */
+/* 基础容器：负责整体定位 */
+/* ========================================= */
+.miepaopao-wrapper {
+  position: relative;
+  max-width: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================= */
+/* 预留结构：装饰与多层背景（完全留空保存） */
+/* ========================================= */
+.miepaopao-wrapper .miepaopao-decorations {
+  position: absolute;
+  z-index: 10;
+  /* 装饰图层这里目前留空，以后想加挂件随时写在这里 */
+}
+
+.miepaopao-wrapper .miepaopao-layers {
+  position: absolute;
+  z-index: 0; 
+  width: 100%;
+  height: 100%;
+  /* 图层预留，当前不需要 */
+}
+
+/* ========================================= */
+/* 内容层：气泡的主体（方圆、舒服的内边距） */
+/* ========================================= */
+.miepaopao-wrapper .miepaopao-content {
+  position: relative;
+  z-index: 1;
+  font-size: 15px; 
+  line-height: 1.5;
+  word-break: break-word;
+  padding: 10px 14px; /* 紧凑适当的内边距，不会显得太空 */
+  border-radius: 12px; /* 舒适的圆角，看起来柔和自然 */
+  box-shadow: none; /* 【去除所有阴影】 */
+  background: rgb(236, 236, 236); /* 统一灰白气泡 */
+  color: #1a1a1a; /* 稍微深一点的黑灰色，在浅灰底色上阅读最舒服 */
+}
+
+/* ========================================= */
+/* 发送方 (user) 的右侧圆润小尾巴 */
+/* ========================================= */
+.miepaopao-wrapper.user .miepaopao-content::after {
+  content: '';
+  position: absolute;
+  top: 12px; /* 高度跟气泡顶部的圆角弧度自然衔接 */
+  right: -5px; /* 微微探出一点点，不死板 */
+  width: 12px;
+  height: 12px;
+  background: rgb(236, 236, 236);
+  transform: rotate(45deg);
+  border-radius: 3px; /* 小尾巴也带一点圆角，不扎手 */
+  z-index: -1; 
+}
+
+/* ========================================= */
+/* 接收方 (char) 的左侧圆润小尾巴 */
+/* ========================================= */
+.miepaopao-wrapper.char .miepaopao-content::after {
+  content: '';
+  position: absolute;
+  top: 12px; /* 高度跟气泡顶部的圆角弧度自然衔接 */
+  left: -5px; /* 微微探出一点点，不死板 */
+  width: 12px;
+  height: 12px;
+  background: rgb(236, 236, 236);
+  transform: rotate(45deg);
+  border-radius: 3px; /* 小尾巴也带一点圆角，不扎手 */
+  z-index: -1; 
+}
+
+/* ========================================= */
+/* 分类预留（完全留空，等待以后使用） */
+/* ========================================= */
+.miepaopao-wrapper.user .miepaopao-decorations {
+  /* user的装饰预留 */
+}
+
+.miepaopao-wrapper.char .miepaopao-decorations {
+  /* char的装饰预留 */
+}
